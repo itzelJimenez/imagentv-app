@@ -1,83 +1,98 @@
-const $email = $('#email');
-const $password = $('#password');
-const $form = $('#form');
+const $correo = $('#correo');
+const $contrasenia = $('#contrasenia');
+const $formulario = $('#formulario');
 const $ingresar = $('#ingresar');
 
 var cargarPagina = function(){
-	$form.submit(validateFields);
+	$formulario.submit(validarCampos);
 	$ingresar.addClass('disabled');
-	emptyFields();
-	$email.keyup(emptyFields);
-	$password.keyup(emptyFields);
-	$ingresar.click(validateFields);
+	camposVacios();
+	$correo.keyup(camposVacios);
+	$contrasenia.keyup(camposVacios);
+	$ingresar.click(validarCampos);
 }
 
-const emptyFields = ()=>{
-	if( $email.val().length == 0 || $password.val().length == 0 ){
+const camposVacios = ()=>{
+	if( $correo.val().length == 0 || $contrasenia.val().length == 0 ){
 		$ingresar.addClass('disabled');
 	}else {
 		$ingresar.removeClass('disabled');
 	}
 }
 
-const validateEmail = ()=>{
-	let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-	if (emailRegex.test($email.val())) {
+const validarCorreo = ()=>{
+	let patronCorreo = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+	if (patronCorreo.test($correo.val())) {
 		return true;
 	} else {
-		alert("Ingresa un email valido");
+		swal({
+			title: "Error!",
+			text: "Ingresa un correo valido!",
+			type: "error",
+			confirmButtonText: "OK"
+		});
 	}
 };
 
-const validatePassword = ()=>{
-	if($password.val().length > 6){
-		alert("Recuerda que debes ingresar un password de 6 dígitos");
-	} else if ($password.val().length < 6){
-		alert("Recuerda que debes ingresar un password de mínimo 6 dígitos");
-	} else if($password.val().length == 6){ return true};
+const validarContrasenia = ()=>{
+	if($contrasenia.val().length > 6){
+		swal({
+			title: "Error!",
+			text: "Recuerda que debes ingresar un password de 6 dígitos!",
+			type: "error",
+			confirmButtonText: "Cool"
+		});
+	} else if ($contrasenia.val().length < 6){
+		swal({
+			title: "Error!",
+			text: "Recuerda que debes ingresar un password de 6 dígitos!",
+			type: "error",
+			confirmButtonText: "OK"
+		});
+	} else if($contrasenia.val().length == 6){ return true};
 }
 
-const validateFields = (e)=>{
+const validarCampos = (e)=>{
 	e.preventDefault();
-	if(validateEmail() && validatePassword()){
-		userRegister();
+	if(validarCorreo() && validarContrasenia()){
+		registroUsuario();
 	} 
 }
 
-const userRegister = function(){
+const registroUsuario = function(){
 	location.href="canal.html"
 };
 
-// Initialize Firebase
 var config = {
-	apiKey: "AIzaSyDhWXnUNzqUjE2BBr3wRfDV24rJMQDlLGU",
-	authDomain: "login-f6999.firebaseapp.com",
-	databaseURL: "https://login-f6999.firebaseio.com",
-	projectId: "login-f6999",
-	storageBucket: "login-f6999.appspot.com",
-	messagingSenderId: "629820319496"
+	apiKey: "AIzaSyB8ZAr0jBCnNMzE7ogIDQNuQPmaitgse1E",
+	authDomain: "app-imagentv-login.firebaseapp.com",
+	databaseURL: "https://app-imagentv-login.firebaseio.com",
+	projectId: "app-imagentv-login",
+	storageBucket: "app-imagentv-login.appspot.com",
+	messagingSenderId: "52269539100"
 };
 firebase.initializeApp(config);
 
 
-var loginWithFb = function(){
-	var provider = new firebase.auth.FacebookAuthProvider();
-	login(provider)
+
+var entrarConFacebook = function(){
+	var proveedor = new firebase.auth.FacebookAuthProvider();
+	entrar(proveedor)
 };
 
-var loginWithTwitter = function(){
-	var provider = new firebase.auth.TwitterAuthProvider();
-	login(provider)
+var entrarConTwitter = function(){
+	var proveedor = new firebase.auth.TwitterAuthProvider();
+	entrar(proveedor)
 };
 
-var loginWithGoogle = function(){
-	var provider = new firebase.auth.GoogleAuthProvider();
-	login(provider)
+var entrarConGoogle = function(){
+	var proveedor = new firebase.auth.GoogleAuthProvider();
+	entrar(proveedor)
 };
 
-var login = function(provider){
+var entrar = function(proveedor){
 
-	firebase.auth().signInWithPopup(provider)
+	firebase.auth().signInWithPopup(proveedor)
 		.then(function(result) {
 		var token = result.credential.accessToken;
 		var user = result.user;
@@ -92,10 +107,10 @@ var login = function(provider){
 		localStorage.setItem('name', responseAPI.name);
 
 
-		loginUser(responseAPI);
+		ingresoDeUsuario(responseAPI);
 	})
 		.then(function() {
-			console.log('hey tu');
+
 		location.href = 'bienvenida.html';
 	})
 		.catch(function(error) {
@@ -107,7 +122,7 @@ var login = function(provider){
 };
 
 
-var userRegisterApi = function(responseAPI){
+var registroUsuarioApi = function(responseAPI){
 	$.post('http://www.imagentv.jediteam.mx/api/users/register', {
 		jsonp: "callback",
 		type: responseAPI.type,
@@ -116,36 +131,32 @@ var userRegisterApi = function(responseAPI){
 	})
 };
 
-var loginUser = function(responseAPI) {
+var ingresoDeUsuario = function(responseAPI) {
 	console.log(responseAPI);
 	$.ajax({
 		url:'http://www.imagentv.jediteam.mx/api/users/login',
-		headers: {
-			"My-First-Header":"first value",
-			"My-Second-Header":"second value"
-		}
 		type: 'POST',
 		data: {
-		type: responseAPI.type,
-		email: responseAPI.email,
-	}, 
-		  success: function(res){
-		console.log(res)
-	}, error: function(error){
-		console.log(error)
-	}
-})
+			type: responseAPI.type,
+			email: responseAPI.email,
+		}, 
+		success: function(res){
+			console.log(res)
+		}, error: function(error){
+			console.log(error)
+		}
+	})
 
 }
 
 
 
-var fbButton = document.querySelector('.login-fb');
-var twitterButton = document.querySelector('.login-twitter');
-var googleButton = document.querySelector('.login-google');
+var botonFb = document.querySelector('.facebook');
+var botonTwitter = document.querySelector('.twitter');
+var botonGoogle = document.querySelector('.google');
 
-fbButton.addEventListener('click', loginWithFb);
-twitterButton.addEventListener('click', loginWithTwitter);
-googleButton.addEventListener('click', loginWithGoogle);
+botonFb.addEventListener('click', entrarConFacebook);
+botonTwitter.addEventListener('click', entrarConTwitter);
+botonGoogle.addEventListener('click', entrarConGoogle);
 
 $(document).ready(cargarPagina);
