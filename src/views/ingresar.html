@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Logear </title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="./main.css">
+	</head>
+
+	<body>
+		<nav class="nav-extended black">
+			<div class="nav-wrapper ">
+				<a href="#" class="brand-logo "><img  src="img/logo3.jpg" alt=""></a>
+				
+			</div>
+		</nav>
+
+		<section id="titulo-ingresar" class="container">
+			<div class="row center" style="margin-top: 15%;">
+				<i class="fa fa-user-circle-o fa-4x" aria-hidden="true" style="color: #2088CA"></i>
+				<h4 style="color: #2088CA">Iniciar sesión</h4>
+			</div>
+
+		</section>
+		<section id="registro" class="container">
+			<div class="row">
+				<form class="col s12" id="form">
+
+					<div class="row">
+						<div class="input-field col offset-s2 s8">
+							<input id="email" type="email" class="validate" required="">
+							<label for="email">Correo electrónico</label>
+						</div>
+
+						<div class="input-field col offset-s2 s8">
+							<input id="password" type="password" class="validate">
+							<label for="password">Contraseña</label>
+						</div>
+					</div>
+				<div class="row center">
+					<a href="notificaciones.html" class="btn red text-white disabled" id="ingresar">CONTINUAR</a>
+				</div>
+				</form>
+				<div class="row center">
+					<div class="col s4 offset-s4"><hr></div>
+				</div>
+				<div class="row">
+					<div class="col offset-s3 s2">
+						<a href="#" class="btn-floating blue darken-3 text-white login-fb"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+					</div>
+					<div class="col s2">
+						<a href="#" class="btn-floating blue text-white login-twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+					</div>
+					<div class="col s2">
+						<a href="#" class="btn-floating red text-white login-google"><i class="fa fa-google" aria-hidden="true"></i></a>
+					</div>
+				</div>
+				<div class="row center">
+					<a href="registro.html">Crear mi cuenta de imagen TV</a>
+				</div>
+			</div>
+		</section>
+		<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://use.fontawesome.com/75919d6994.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+		<script type="text/javascript" src="../js/ingresar.js"></script>
+	</body>
+</html>
+

@@ -1,0 +1,29 @@
+{
+  "name": "app-imagentv",
+  "version": "1.0.0",
+  "description": "Replica de app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YessiGarcia/app-imagentv.git"
+  },
+  "author": "Squad imagentv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YessiGarcia/app-imagentv/issues"
+  },
+  "homepage": "https://github.com/YessiGarcia/app-imagentv#readme",
+  "dependencies": {
+    "materialize-css": "^0.100.1",
+    "sweetalert": "^1.1.3"
+  },
+  "devDependencies": {
+    "express": "^4.15.4",
+    "gulp": "^3.9.1",
+    "gulp-pug": "^3.3.0",
+    "gulp-sass": "^3.1.0"
+  }
+}

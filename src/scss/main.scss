@@ -1,0 +1,26 @@
+$colornegro: #000000;
+$colorazul: #6584ef;
+$colorgrisc: #8f8f8f;
+$colortur: #00c3a3;
+$colormoradof:#38052a;
+$colormoradoc:#451e36;
+$colorblanco: #ffffff;
+
+.navc{
+  background-color: $colornegro;
+}
+
+.anchob{
+  width: 65em;
+}
+
+.letraazul{
+  color: #4fc3f7 ;
+}
+
+.slider .slides li img {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: right;
+}
